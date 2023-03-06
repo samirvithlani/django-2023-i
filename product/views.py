@@ -1,7 +1,7 @@
-from django.shortcuts import render
-from .models import Product
+from django.shortcuts import render,redirect
+from .models import Product,Category
 from django.http import HttpResponse
-from .forms import ProductForm
+from .forms import ProductForm,CategoryForm
 
 # Create your views here.
 def getAllProducts(request):
@@ -38,8 +38,7 @@ def deleteProduct(request,id):
     #id = 1
     product = Product.objects.get(id=id)
     product.delete()
-    
-    return HttpResponse("product deleted")
+    return redirect('getproducts')
     #return render(request,'product/deleteproduct.html')
     
 def updateProduct(request,id):
@@ -56,7 +55,10 @@ def updateProduct(request,id):
     # product.save()
     return HttpResponse("product updated")
     #return render(request,'product/updateproduct.html')
-    
+  
+def getProductDetail(request,id):
+    product = Product.objects.get(id=id)    
+    return render(request,'product/productdetail.html',{'product':product})
     
 def addProductWithForm(request):
     
@@ -75,4 +77,51 @@ def addProductWithForm(request):
     #     pName = request.POST['pName']
         
             
+def updateProductWithForm(request,id):
+    
+    #7
+    product = Product.objects.get(id=id)
+    form = ProductForm()
+    
+    print("post.....")
+    form = ProductForm(request.POST or None,instance=product)    
+    if form.is_valid():
+        form.save()
+        return redirect('getproducts')  
+    
+    return render(request,'product/updateproductwithform.html',{'form':form})  
+
+
+
+def addCategory(request):
+    form = CategoryForm()
+    if request.method =="POST":
+        form = CategoryForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+            return redirect('getcategories')
+    
+    return render(request,'product/addcategory.html',{'form':form})    
+
+def getAllCategories(request):
+    categories = Category.objects.all().values()
+    return render(request,'product/allcategories.html',{'categories':categories})
+                
+   
+def deleteCategory(request,id):
+    
+    cat = Category.objects.get(id=id)
+    cat.delete()
+    return redirect('getcategories')
+        
+    
+def updateCat(request,id):
+    cat = Category.objects.get(id=id)
+    form = CategoryForm(request.POST or None,instance=cat)
+    if form.is_valid():
+        cat.save()
+        return redirect('getcategories')
+    
+    return render(request,'product/updatecategory.html',{'form':form})
+        
     

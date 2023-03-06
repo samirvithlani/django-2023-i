@@ -9,27 +9,26 @@
     />
   </head>
   <body>
-    <h1>ALL PRODUCTS</h1>
+    <h1>ALL CAT</h1>
     <table class="table table-secondary">
       <thead>
         <tr>
           <th scope="col">ID</th>
           <th scope="col">NAME</th>
-          <th scope="col">PRICE</th>
-          <th scope="col">ACTION</th>
+          <th scope="col">DESC</th>
+          
 
         </tr>
       </thead>
       <tbody>
-        {% for i in products %}
+        {% for i in categories %}
          <tr>
           <th scope="row">{{i.id}}</th>
-          <td>{{i.pName}}</td>
-          <td>{{i.pPrice}}</td>
+          <td>{{i.name}}</td>
+          <td>{{i.desc}}</td>
           <td>
-            <a href ="{% url 'updateproduct' i.id %}" class ="btn btn-primary">Edit</a>
-            <a href ="{% url 'deleteproduct' i.id %}" class ="btn btn-danger">DELETE</a>
-            <a href ="{% url 'productdetail' i.id %}" class ="btn btn-info">DETAIL</a>
+            <a href ="{% url 'updatecategory' i.id %}" class ="btn btn-primary">Edit</a>
+            <a href ="{% url 'deletecategory' i.id %}" class ="btn btn-danger">DELETE</a>
           </td>
         </tr>
         {% endfor %}
