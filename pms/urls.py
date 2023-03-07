@@ -23,7 +23,8 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('article/', include('article.urls')),
     path('',home),
-    path('product/',include('product.urls'))
+    path('product/',include('product.urls')),
+    path('cbv/',include('cbv.urls')),
     
     
 ]
