@@ -2,6 +2,9 @@ from django.shortcuts import render,redirect
 from .models import Product,Category
 from django.http import HttpResponse
 from .forms import ProductForm,CategoryForm
+from django.conf import settings
+#send mail
+from django.core.mail import send_mail
 
 # Create your views here.
 def getAllProducts(request):
@@ -125,3 +128,17 @@ def updateCat(request,id):
     return render(request,'product/updatecategory.html',{'form':form})
         
     
+    
+def sendMail(request):
+    subject = "welcome to django"
+    message = "hello django"
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = ['apurvgarg66@gmail.com','vrajshah1930@gmail.com']
+    res = send_mail(subject,message,email_from,recipient_list)
+    if res>0:
+        print("mail sent")
+    else:
+        print("mail not sent")    
+    print(res)
+    return HttpResponse("mail sent")
+   
