@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'student',
     'cbv',
     'crispy_forms',
-    'crispy_bootstrap5'
+    'crispy_bootstrap5',
+    'user'
 ]
 
 MIDDLEWARE = [
@@ -79,6 +80,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'pms.wsgi.application'
+AUTH_USER_MODEL = 'user.User'
 
 
 # Database
@@ -142,6 +144,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+#Auth settings
+
 
 #Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
