@@ -81,6 +81,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pms.wsgi.application'
 AUTH_USER_MODEL = 'user.User'
+#LOGIN_REDIRECT_URL = '/'
 
 
 # Database
