@@ -40,10 +40,11 @@ class UserLoginView(LoginView):
     #success_url = "/"
     
     def get_redirect_url(self):
-        if self.request.user.is_manager1:
-            return '/manager/'
-        else:
-            return '/developer/'
+        if self.request.user.is_authenticated:
+            if self.request.user.is_manager1:
+                return '/cbv/list/'
+            else:
+                return '/developer/'
         
         
     

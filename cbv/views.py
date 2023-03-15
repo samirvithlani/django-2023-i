@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.views.generic.edit import CreateView,DeleteView,UpdateView
 from django.views.generic import ListView,DetailView
 from .models import Food,AddFile
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 # Create your views here.
 class FoodCreateView(CreateView):
@@ -9,6 +11,10 @@ class FoodCreateView(CreateView):
     model = Food
     template_name = 'cbv/foodcreate.html'
     success_url = '/cbv/list'
+
+#@login_required
+#@method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url='/user/login'), name='dispatch')
 
 class FoodListView(ListView):
     model = Food
