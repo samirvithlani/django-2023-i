@@ -34,7 +34,7 @@ class DeveloperRegisterView(CreateView):
         return super().get_context_data(**kwargs)
     
 
-
+  
 class UserLoginView(LoginView):
     template_name = 'user/login.html'
     #success_url = "/"

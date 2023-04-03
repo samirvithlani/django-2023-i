@@ -4,6 +4,7 @@ from django.views.generic import ListView,DetailView
 from .models import Food,AddFile
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from user.decorators import manager_required,developer_required
 
 # Create your views here.
 class FoodCreateView(CreateView):
@@ -14,8 +15,9 @@ class FoodCreateView(CreateView):
 
 #@login_required
 #@method_decorator(login_required, name='dispatch')
-@method_decorator(login_required(login_url='/user/login'), name='dispatch')
-
+#@method_decorator(login_required(login_url='/user/login'), name='dispatch')
+#pass multipule decroators
+@method_decorator([login_required(login_url="/user/login"),developer_required], name='dispatch')
 class FoodListView(ListView):
     model = Food
     template_name = 'cbv/foodlist.html'
